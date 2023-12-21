@@ -1,33 +1,34 @@
 from selenium import webdriver
-
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
-from actions import login, navigate
+from actions import login, navigate, search, click
 
 
 def main():
-    driver = webdriver.Chrome()
-    driver.get("https://www47.bb.com.br/maisbb/gcs/statics/login/login.bb#/j")
+    url = "https://www47.bb.com.br/maisbb/gcs/statics/login/login.bb#/j"
+
+    opt = webdriver.ChromeOptions()
+    opt.add_argument("--start-maximized")
+
+    driver = webdriver.Chrome(options=opt)
+    driver.get(url)
 
     print("Bem vindo a ENC!")
 
     sleep(5)
 
+    driver.implicitly_wait(5)
+
     # accessing the bank of brazil website
     login.make_login(driver)
+
+    driver.implicitly_wait(5)
 
     # navigating to the proposal print tab
     navigate.navigate_to_proposal_printing(driver)
 
-    # select = driver.find_element(by=By.NAME, value="form1:j_id377")
-    # select.click()
+    search.search_proposal(driver)
 
-    # action = ActionChains(driver)
-    # action.key_down(Keys.ARROW_DOWN).perform()
-    # action.key_down(Keys.ARROW_DOWN).perform()
-    # action.key_down(Keys.ENTER).perform()
+    click.generate_proposal(driver)
 
     input("Pressione Enter para encerrar o programa e fechar o navegador...")
     driver.quit()
