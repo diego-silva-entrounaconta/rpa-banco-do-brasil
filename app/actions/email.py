@@ -25,7 +25,7 @@ def create_excel():
     for row in data.dados:
         if len(row) != len(data.COLS):
             row += [None] * (len(data.COLS) - len(row))
-            
+
     aqrv = pd.DataFrame(data=data.dados, columns=data.COLS)
 
     excel_file = io.BytesIO()
