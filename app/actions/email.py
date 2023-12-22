@@ -8,6 +8,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 from configuration import data
+from datetime import date
 
 
 # Load environment variables from .env file
@@ -21,14 +22,18 @@ recipient = os.getenv("RECIPIENT")
 
 
 def create_excel():
+    for row in data.dados:
+        if len(row) != len(data.COLS):
+            row += [None] * (len(data.COLS) - len(row))
+            
     aqrv = pd.DataFrame(data=data.dados, columns=data.COLS)
 
     excel_file = io.BytesIO()
 
     with pd.ExcelWriter(excel_file, engine="xlsxwriter") as writer:
-        aqrv.to_excel(writer, sheet_name="teste generate excel", index=False)
+        aqrv.to_excel(writer, sheet_name="Relatório Banco do Brasil", index=False)
 
-        worksheet = writer.sheets["teste generate excel"]
+        worksheet = writer.sheets["Relatório Banco do Brasil"]
 
         for idx, col in enumerate(aqrv.columns):
             series = aqrv[col]
@@ -65,8 +70,11 @@ def send_email():
     part = MIMEBase("application", "octet-stream")
     part.set_payload(excel_file.getvalue())
     encoders.encode_base64(part)
+    today_base = date.today()
+    today = today_base.strftime("%d/%m/%Y")
     part.add_header(
-        "Content-Disposition", 'attachment; filename="generate_xls_teste.xlsx"'
+        "Content-Disposition",
+        f'attachment; filename="relatorio_banco_do_brasil_{today}.xlsx"',
     )
     msg.attach(part)
 

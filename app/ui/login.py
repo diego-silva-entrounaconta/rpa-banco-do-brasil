@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Load environment variables from .env file
 dotenv.load_dotenv()
@@ -15,6 +17,8 @@ password = os.getenv("PASSWORD")
 
 
 def make_login(driver: WebDriver):
+    wait = WebDriverWait(driver, timeout=10)
+
     # Search for inputs
     input_login = driver.find_element(by=By.NAME, value="chave")
     input_password = driver.find_element(by=By.NAME, value="senha")
@@ -29,7 +33,9 @@ def make_login(driver: WebDriver):
     action.key_down(Keys.ENTER).perform()
 
     # Close alert
-    btn_close_modal = driver.find_element(
-        by=By.XPATH, value='//*[@id="j_id364:form1:pnlContentDiv"]/div/a'
+    btn_close_modal = wait.until(
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="j_id364:form1:pnlContentDiv"]/div/a')
+        )
     )
     btn_close_modal.click()
