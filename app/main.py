@@ -21,7 +21,7 @@ def main():
         opt.add_argument(args)
 
     # Create the browser instance and open
-    driver = webdriver.Chrome(options=opt)
+    driver = webdriver.Chrome(os.environ.get("CHROMEDRIVER_PATH"), options=opt)
     driver.get(url)
 
     sleep(5)

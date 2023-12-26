@@ -1,1 +1,1 @@
-web: python app/main.py
+wroker: python app/main.py
