@@ -6,6 +6,8 @@ from typing import List
 
 
 def get_and_set_data_by_proposal(driver: WebDriver, dt: List[str]):
+    # Função responsavel por buscar os dados e setar eles
+
     cpf = driver.find_element(by=By.ID, value="cpf").text
     client_name = driver.find_element(by=By.ID, value="nome").text
     agreement = driver.find_element(by=By.ID, value="nomeConvenio").text

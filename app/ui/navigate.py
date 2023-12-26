@@ -1,10 +1,9 @@
-"""Imports"""
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 
 def navigate_to_proposal_printing(driver: WebDriver):
-    """Function navigate to proposal printing"""
+    # Function redirects the page until the proposal is printed
     table_item_product = driver.find_element(by=By.ID, value="idtab3_lbl")
     table_item_product.click()
 
@@ -13,7 +12,7 @@ def navigate_to_proposal_printing(driver: WebDriver):
 
 
 def navigate_to_daily_movement(driver: WebDriver):
-    """Function navigate to daily moment"""
+    # Funciton redirect the page for daily movement
     driver.get(
         "https://www47.bb.com.br/maisbb/produtos/emprestimo/movimentodiarioproducao.seam"
     )
