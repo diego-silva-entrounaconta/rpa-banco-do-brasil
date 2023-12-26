@@ -4,6 +4,8 @@ from selenium import webdriver
 from time import sleep
 from workflow import steps
 from configuration import settings
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 # Load environment variables from .env file
 dotenv.load_dotenv()
@@ -16,13 +18,15 @@ def main():
     print("Starting...")
 
     # Add arguments to browser options
-    opt = webdriver.ChromeOptions()
+    opt = Options()
     for index, args in enumerate(settings.arguments):
         opt.add_argument(args)
 
     # Create the browser instance and open
     chrome_path = os.environ.get("CHROMEDRIVER_PATH")
-    driver = webdriver.Chrome(executable_path=chrome_path, options=opt)
+    service = Service(chrome_path)
+
+    driver = webdriver.Chrome(service=service, options=opt)
     driver.get(url)
 
     sleep(5)
