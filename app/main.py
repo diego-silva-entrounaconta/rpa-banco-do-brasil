@@ -13,6 +13,7 @@ url = os.getenv("URL")
 
 
 def main():
+    print("Starting...")
 
     # Add arguments to browser options
     opt = webdriver.ChromeOptions()
@@ -41,6 +42,8 @@ def main():
 
     sleep(1)
     steps.step_five()
+
+    print("Finishing...")
 
     sleep(1.5)
     driver.quit()
