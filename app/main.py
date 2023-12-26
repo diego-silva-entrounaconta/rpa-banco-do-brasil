@@ -33,18 +33,23 @@ def main():
 
     driver.implicitly_wait(5)
 
+    print("Step one")
     # Calling step by step
     steps.step_one(driver)
 
+    print("Step two")
     sleep(1)
     steps.step_two(driver)
 
+    print("Step three")
     sleep(1)
     steps.step_three(driver)
 
+    print("Step four")
     sleep(1)
     steps.step_four(driver)
 
+    print("Step five")
     sleep(1)
     steps.step_five()
 

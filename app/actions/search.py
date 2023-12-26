@@ -44,13 +44,14 @@ def search_daily_moviment(driver: WebDriver, data: str):
     btn_consult.click()
 
     # Search for error message container
-    erro_container = driver.find_element(by=By.CLASS_NAME, value="err_msg")
+    try:
+        erro_container = driver.find_element(by=By.CLASS_NAME, value="err_msg")
 
-    # If the error exists, close the program
-    if erro_container:
-        print("No data found!")
-        driver.quit()
-    else:
+        # If the error exists, close the program
+        if erro_container:
+            print("No data found!")
+            driver.quit()
+    except Exception:
         # Find the details button and press it
         btn_details = driver.find_element(by=By.CLASS_NAME, value="rich-table-cell")
         children_btn_details = btn_details.find_element(
