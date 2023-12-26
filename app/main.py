@@ -13,10 +13,13 @@ url = os.getenv("URL")
 
 
 def main():
+
+    # Add arguments to browser options
     opt = webdriver.ChromeOptions()
     for index, args in enumerate(settings.arguments):
         opt.add_argument(args)
 
+    # Create the browser instance and open
     driver = webdriver.Chrome(options=opt)
     driver.get(url)
 
@@ -24,6 +27,7 @@ def main():
 
     driver.implicitly_wait(5)
 
+    # Calling step by step
     steps.step_one(driver)
 
     sleep(1)

@@ -22,12 +22,15 @@ recipient = os.getenv("RECIPIENT")
 
 
 def create_excel():
+    # Function responsible for creating excel
+
+    # Fill lines with none if they are not complete
     for row in data.dados:
         if len(row) != len(data.COLS):
             row += [None] * (len(data.COLS) - len(row))
 
+    # create excel
     aqrv = pd.DataFrame(data=data.dados, columns=data.COLS)
-
     excel_file = io.BytesIO()
 
     with pd.ExcelWriter(excel_file, engine="xlsxwriter") as writer:
@@ -47,15 +50,18 @@ def create_excel():
 
 
 def send_email():
+    # Function responsible for sending the email
+
+    # Calling the function that creates excel
     excel_file = create_excel()
 
-    # Criar mensagem de e-mail
+    # Create email message
     msg = MIMEMultipart()
-    msg["From"] = sender  # Seu endereço de e-mail
-    msg["To"] = recipient  # Endereço de e-mail do destinatário
+    msg["From"] = sender
+    msg["To"] = recipient
     msg["Subject"] = "Relátorio Banco do Brasil"
 
-    # Adicionar corpo ao e-mail (texto ou HTML)
+    # Add body to email (text or HTML)
     body = """\
     <html>
     <body>
@@ -66,7 +72,7 @@ def send_email():
     """
     msg.attach(MIMEText(body, "html"))
 
-    # Anexar o arquivo Excel ao e-mail
+    # Attach the Excel file to the email
     part = MIMEBase("application", "octet-stream")
     part.set_payload(excel_file.getvalue())
     encoders.encode_base64(part)
@@ -78,12 +84,12 @@ def send_email():
     )
     msg.attach(part)
 
-    # Configurações do servidor SMTP e autenticação
+    # SMTP server settings and authentication
     smtp_server = "smtp.office365.com"  # Altere para o servidor SMTP correto
     port = 587  # Porta do servidor SMTP
     senha = password  # Sua senha de e-mail
 
-    # Conectar e enviar e-mail
+    # Connect and send email
     try:
         server = smtplib.SMTP(smtp_server, port)
         server.starttls()
