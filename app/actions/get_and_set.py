@@ -1,6 +1,6 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
-from configuration import data
+from app.configuration import data
 from time import sleep
 from typing import List
 

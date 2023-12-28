@@ -2,7 +2,7 @@ import dotenv
 import os
 from selenium import webdriver
 from time import sleep
-from workflow import steps
+from app.workflow import steps
 from configuration import settings
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -22,7 +22,7 @@ def main():
     for index, args in enumerate(settings.arguments):
         opt.add_argument(args)
 
-    # Create the browser instance and open
+    # # Create the browser instance and open
     chrome_path = os.environ.get("CHROMEDRIVER_PATH")
     service = Service(chrome_path)
 

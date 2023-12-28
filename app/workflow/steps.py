@@ -1,14 +1,14 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
-from ui import login, navigate
-from actions import search, click, get_and_set, email
-from utils import get_data
-from configuration import data
 from time import sleep
+from app.ui import login, navigate
+from app.actions import search, click, get_and_set, email
+from app.utils import get_data
+from app.configuration import data
 
 date_yesterday = get_data.get_date_yesterday()
 
 
-def step_one(driver: WebDriver):
+def step_one(driver):
     # Accessing the bank of brazil website
     login.make_login(driver)
 
