@@ -50,3 +50,4 @@ wsproto==1.2.0
 XlsxWriter==3.1.9
 zope.event==5.0
 zope.interface==6.1
+webdriver-manager==4.0.1
