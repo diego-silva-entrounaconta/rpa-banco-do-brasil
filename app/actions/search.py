@@ -1,6 +1,7 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+import sys
 
 
 def search_proposal(driver: WebDriver, data: str):
@@ -51,6 +52,7 @@ def search_daily_moviment(driver: WebDriver, data: str):
         if erro_container:
             print("No data found!")
             driver.quit()
+            sys.exit()
     except Exception:
         # Find the details button and press it
         btn_details = driver.find_element(by=By.CLASS_NAME, value="rich-table-cell")

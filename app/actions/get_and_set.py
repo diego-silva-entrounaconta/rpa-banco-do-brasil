@@ -28,7 +28,6 @@ def get_and_set_data_by_proposal(driver: WebDriver, dt: List[str]):
     rate = data_dict["Taxa Mensal de Juros (%):"]
     installment_value = data_dict["Valor Parcela"]
     gross_value = data_dict["Valor Total do Empréstimo:"]
-    net_value = data_dict["Valor solicitado"]
 
     data_list = [
         cpf,
@@ -38,7 +37,6 @@ def get_and_set_data_by_proposal(driver: WebDriver, dt: List[str]):
         rate,
         installment_value,
         gross_value,
-        net_value,
     ]
 
     type_of_proposal = ""
@@ -46,15 +44,18 @@ def get_and_set_data_by_proposal(driver: WebDriver, dt: List[str]):
     if dt[0] == proposal_number:
         if dt[3] == "0,00" and credit_line == "BB RENOVAÇÃO CONSIGNAÇÃO":
             type_of_proposal = "REFIN S/ TROCO"
+            net_value = dt[3]
         elif dt[3] != "0,00":
             type_of_proposal = "REFIN C/ TROCO"
+            net_value = dt[3]
         else:
             type_of_proposal = "NOVO"
+            net_value = data_dict["Valor solicitado"]
 
+        data_list.append(net_value)
+        data_list.append(type_of_proposal)
         for i, item in enumerate(data_list):
             dt.append(item)
-
-        dt.append(type_of_proposal)
 
     return
 

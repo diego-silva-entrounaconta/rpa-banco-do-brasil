@@ -18,7 +18,7 @@ def get_date_yesterday():
     # Busca a data do dia anterior
     date_now = date.today()
 
-    for date_to_subtract in range(2, 5):
+    for date_to_subtract in range(2, 7):
         date_yesterday = date_now - timedelta(days=date_to_subtract)
 
         if not is_holiday(date_yesterday) and not is_weekend(date_yesterday):
