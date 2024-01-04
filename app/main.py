@@ -1,9 +1,9 @@
 import dotenv
 import os
-from selenium import webdriver
 from time import sleep
 from app.workflow import steps
 from configuration import settings
+from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -22,10 +22,6 @@ def main():
     opt = Options()
     for index, args in enumerate(settings.arguments):
         opt.add_argument(args)
-
-    # # Create the browser instance and open
-    # chrome_path = os.environ.get("CHROMEDRIVER_PATH")
-    # service = ChromeService(chrome_path)
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=opt)
     driver.get(url)
