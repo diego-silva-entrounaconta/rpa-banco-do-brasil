@@ -1,5 +1,7 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
 from time import sleep
+
+from selenium.webdriver.chrome.webdriver import WebDriver
+
 from app.ui import login, navigate
 from app.actions import search, click, get_and_set, email
 from app.utils import get_data
@@ -40,5 +42,5 @@ def step_four(driver: WebDriver):
 
 
 def step_five():
-    # Create Excek and Send email
+    # Create Excel and Send email
     email.send_email()

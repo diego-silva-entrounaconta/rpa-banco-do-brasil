@@ -1,5 +1,5 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 
 def navigate_to_proposal_printing(driver: WebDriver):

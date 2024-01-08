@@ -1,24 +1,27 @@
 import dotenv
 import os
-import pandas as pd
 import io
 import smtplib
+from datetime import date, timedelta
+
+import pandas as pd
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
-from app.configuration import data
-from datetime import date
 
+from app.configuration import data
+from app.utils import get_data
 
 # Load environment variables from .env file
 dotenv.load_dotenv()
-
 
 # Access environment variables
 sender = os.getenv("SENDER")
 password = os.getenv("PASSWORD_EMAIL_SENDER")
 recipient = os.getenv("RECIPIENT")
+
+date_yesterday = get_data.get_date_yesterday()
 
 
 def create_excel():
@@ -41,7 +44,7 @@ def create_excel():
         for idx, col in enumerate(aqrv.columns):
             series = aqrv[col]
             max_len = (
-                max((series.astype(str).map(len).max(), len(str(series.name)))) + 1
+                    max((series.astype(str).map(len).max(), len(str(series.name)))) + 1
             )
 
             worksheet.set_column(idx, idx, max_len)
@@ -76,11 +79,11 @@ def send_email():
     part = MIMEBase("application", "octet-stream")
     part.set_payload(excel_file.getvalue())
     encoders.encode_base64(part)
-    today_base = date.today()
-    today = today_base.strftime("%d/%m/%Y")
+
+    yesterday = date_yesterday.replace("/", "-")
     part.add_header(
         "Content-Disposition",
-        f'attachment; filename="relatorio_banco_do_brasil_{today}.xlsx"',
+        f'attachment; filename="relatorio_comissao_bb_{yesterday}.xlsx"',
     )
     msg.attach(part)
 

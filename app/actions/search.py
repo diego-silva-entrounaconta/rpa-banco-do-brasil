@@ -1,7 +1,8 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
+import sys
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-import sys
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 
 def search_proposal(driver: WebDriver, data: str):

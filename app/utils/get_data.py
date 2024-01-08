@@ -1,21 +1,21 @@
-from datetime import date, timedelta
 import holidays
+from datetime import date, timedelta
 
 
 def is_weekend(date_to_check):
-    # Verifica se é sábado (5) ou domingo (6)
+    # Check if it is Saturday (5) or Sunday (6)
     return date_to_check.weekday() in [5, 6]
 
 
 def is_holiday(date_to_check):
-    # Verifica se é feriado
+    # Check if it is a holiday
     br_holidays = holidays.Brazil()
 
     return date_to_check in br_holidays
 
 
 def get_date_yesterday():
-    # Busca a data do dia anterior
+    # Search the date of the previous day
     date_now = date.today()
 
     for date_to_subtract in range(2, 7):

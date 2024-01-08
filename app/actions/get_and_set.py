@@ -1,8 +1,10 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.common.by import By
-from app.configuration import data
 from time import sleep
 from typing import List
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.webdriver import WebDriver
+
+from app.configuration import data
 
 
 def get_and_set_data_by_proposal(driver: WebDriver, dt: List[str]):
